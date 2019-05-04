@@ -1,0 +1,15 @@
+{{- $.Scratch.Set "Description" ( .Description | default (.Param "subtitle") | default .Summary ) }}
+{{- $.Scratch.Set "Title" ( .Title | default .Site.Title)}}
+<head>
+  {{- with ($.Scratch.Get "Title") }}
+  <title>{{ . }} - {{ $.Site.Title }}</title>
+  <meta property="og:title" content="{{ . }}" />
+  <meta name="twitter:title" content="{{ . | truncate 70 }}" />
+  {{- end }} {{- with ($.Scratch.Get "Description") }}
+  <meta name="description" content="{{ . }}" />
+  <meta property="og:description" content="{{ . }}" />
+  <meta name="twitter:description" content="{{ . | truncate 200 }}" />
+  {{- end }}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
